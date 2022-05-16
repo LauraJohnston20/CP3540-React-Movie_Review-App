@@ -1,24 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
 import { MovieList } from './Movies';
+import { Routes, Route } from "react-router-dom";
+import { Home, AddReview } from "./pages";
 
 
-function App({secret: sc}) {
+function App() {
 
   const [movies, setMovies] = useState(null);
 
   useEffect( () => {
-    //load the json data
     fetch("./movies.json")
     .then( response => response.json() )
     .then( setMovies )
-    .then( console.log(movies) )
     .catch( e => console.log(e.message) );
   }, [])
 
   return (
-    <MovieList movies={movies} setMovies={setMovies}/>
+    <div className='App'>
+      <Routes>
+        <Route path="/" element={<Home movies={movies} setMovies={setMovies}/>} />
+        <Route path="/addReview" element={<AddReview movies={movies} setMovies={setMovies}/>} />
+      </Routes>
+    </div>
   )
 
 }
