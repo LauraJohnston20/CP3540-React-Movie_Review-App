@@ -5,8 +5,8 @@ export function Movie( {name, date, actors, poster, rating, onRemove = f => f} )
     return(
         <>
 
-            <Card key={name} style={{ width: '18rem'}} className="box">
-            <Card.Img variant="top" src={poster} alt={name + 'poster'} />
+            <Card key={name} style={{ width: '18rem', margin: '10px'}} className="box">
+            <Card.Img variant="top" src={poster} alt={name + 'poster'} style={{resizeMode: "contain"}} />
             <Card.Body>
                 <Card.Title>{name}</Card.Title>
                 <Card.Text>
@@ -28,7 +28,7 @@ export function MovieList( { movies = [], onRemoveMovie = f => f } ) {
     
         return(
             <>
-            <div className="mt-3" style={{display: "flex", flexWrap: "wrap", width: "70%", justifyContent: "center"}}>
+            <div className="mt-3" style={{display: "flex", flexWrap: "wrap", width: "70%", justifyContent: "center", margin: "auto"}}>
                 {movies.map((movie, i) => {
                     return <Movie key={i} {...movie} onRemove={onRemoveMovie} />
                 })
@@ -36,4 +36,4 @@ export function MovieList( { movies = [], onRemoveMovie = f => f } ) {
             </div>
             </>
         );
-    }
+}
