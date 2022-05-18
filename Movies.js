@@ -1,14 +1,23 @@
 import React from 'react';
+import { Button, Card } from 'react-bootstrap';
 
 export function Movie( {name, date, actors, poster, rating, onRemove = f => f} ) {
     return(
         <>
-            <h2>{name}</h2>
-            <img src={poster} alt={name + "Movie Poster"}></img>
-            <h3>Release Date: {date}</h3>
-            <h3>Starring: {(actors).join(", ")}</h3>
-            <h3>Rating: {rating}</h3>
-            <button onClick={() => onRemove(name)}>Remove</button>
+
+            <Card key={name} style={{ width: '18rem', margin: '10px'}} className="box">
+            <Card.Img variant="top" src={poster} alt={name + 'poster'} style={{resizeMode: "contain"}} />
+            <Card.Body>
+                <Card.Title>{name}</Card.Title>
+                <Card.Text>
+                    <div>Release Date: {date}</div>
+                    <div>Starring: {(actors).join(", ")}</div>
+                    <div>Rating: {rating}</div>
+                </Card.Text>
+                <Button onClick={() => onRemove(name)}>Remove</Button>
+            </Card.Body>
+            </Card>
+
         </>
     );
 }
@@ -19,10 +28,12 @@ export function MovieList( { movies = [], onRemoveMovie = f => f } ) {
     
         return(
             <>
+            <div className="mt-3" style={{display: "flex", flexWrap: "wrap", width: "70%", justifyContent: "center", margin: "auto"}}>
                 {movies.map((movie, i) => {
                     return <Movie key={i} {...movie} onRemove={onRemoveMovie} />
                 })
             }
+            </div>
             </>
         );
-    }
+}
